@@ -1,0 +1,5 @@
+TODO:
+update current functionality list
+reformat code for improved security
+put code on new github repository
+Weight Tracker
