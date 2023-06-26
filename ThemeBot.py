@@ -9,10 +9,6 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 
-# list of channel id's
-# general:
-
-
 # event listener for starting the bot
 @bot.event
 async def on_ready():
