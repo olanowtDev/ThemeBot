@@ -10,6 +10,7 @@ def get_unused_themes(database):
     # print(unused_df.to_string())
     unused_list = unused_df['Theme'].tolist()
     # print(unused_list)
+    unused_list = '\n'.join(unused_list)
     return unused_list
 
 
@@ -19,6 +20,7 @@ def get_used_themes(database):
     used_df = df.loc[df['Used'] == True]
     # print(used_df.to_string())
     used_list = used_df['Theme'].tolist()
+    used_list = '\n'.join(used_list)
     # print(used_list)
     return used_list
 

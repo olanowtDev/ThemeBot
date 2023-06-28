@@ -51,14 +51,14 @@ async def input_theme(ctx, *theme_idea):
 @bot.command(name='print_themes')
 async def print_unused_themes(ctx):
     await ctx.channel.send('Printing all unused themes in list: ')
-    unused_list = get_unused_themes('Themes.csv')
+    unused_list = get_unused_themes('Resources/Themes.csv')
     await ctx.channel.send(unused_list)
 
 
 @bot.command(name='print_used')
 async def print_used_themes(ctx):
     await ctx.channel.send("Printing all of the used themes in list: ")
-    used_list = get_used_themes('Themes.csv')
+    used_list = get_used_themes('Resources/Themes.csv')
     await ctx.channel.send(used_list)
 
 
