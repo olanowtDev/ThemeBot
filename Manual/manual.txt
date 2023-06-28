@@ -1,0 +1,13 @@
+ThemeBot General Manual:
+prefix commands with <$> to activate theme bot
+Commands:
+1. $input_theme <your theme>
+    inputs your idea for a theme to the themes file
+2. $print_themes
+    Prints all unused themes to discord channel
+3. $print_used_themes
+    Prints all used themes to discord channel
+4. $select_theme
+    Gets a random unused theme from the themes file, updates the file and outputs the theme to the discord text channel
+5. $man <optional input>
+    outputs the manual text file to discord

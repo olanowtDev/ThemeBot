@@ -95,3 +95,18 @@ def get_channel_code(fpath, c):
             return day
 
 
+def manual(manpage):
+    man = ''
+    if manpage == '':
+        with open('Manual/manual.txt') as f:
+            lines = f.readlines()
+    else:
+        fpath = f'Manual/{manpage}.txt'
+        with open(fpath) as f:
+            lines = f.readlines()
+
+    man = ''.join(lines)
+
+    return man
+
+

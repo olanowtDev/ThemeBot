@@ -72,4 +72,13 @@ async def select_theme_bot(ctx):
 with open('Resources/token.txt') as f:
     token = f.readline()
 
+
+@bot.command(name='man')
+async def man(ctx, *manpage):
+    if len(manpage) == 0:
+        manpage = ''
+    output = manual(manpage)
+    await ctx.channel.send(output)
+
+
 bot.run(token)
