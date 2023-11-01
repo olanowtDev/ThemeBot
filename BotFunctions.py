@@ -1,6 +1,9 @@
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
 import csv
+import os
+import time
 
 
 # method to print all the themes that have not been used
@@ -110,5 +113,27 @@ def manual(manpage):
     man = ''.join(lines)
 
     return man
+
+
+# returns file path for chart to use in conjunction with delete_image_resource
+def get_weight_loss_chart(name):
+    df = pd.read_csv(f'NoFatNovember/{name}.csv', index_col='Index')
+    dates = df['date']
+    weights = df['weight']
+    with plt.style.context('dark_background'):
+        plt.title('No Fat November Chart')
+        plt.xlabel('Date(mm/dd)')
+        plt.ylabel('Weight(lbs.)')
+        plt.plot(dates, weights, color='blue')
+        plt.show()
+        fpath = f'Resources/{name}-chart.png'
+        plt.savefig(f'Resources/{name}-chart.png')
+        time.sleep(2)
+        delete_image_resource(fpath)
+    return fpath
+
+
+def delete_image_resource(fpath):
+    os.remove(fpath)
 
 

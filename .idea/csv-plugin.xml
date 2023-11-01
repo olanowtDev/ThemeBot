@@ -17,6 +17,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Stats\Chris.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Stats\Hayden.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Stats\Tristan.csv">
           <value>
             <Attribute>

@@ -11,3 +11,4 @@ Commands:
     Gets a random unused theme from the themes file, updates the file and outputs the theme to the discord text channel
 5. $man <optional input>
     outputs the manual text file to discord
+    add input to get manual page of specific command
