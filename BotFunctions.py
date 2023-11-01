@@ -1,6 +1,9 @@
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
 import csv
+import os
+import time
 
 
 # method to print all the themes that have not been used
@@ -10,6 +13,7 @@ def get_unused_themes(database):
     # print(unused_df.to_string())
     unused_list = unused_df['Theme'].tolist()
     # print(unused_list)
+    unused_list = '\n'.join(unused_list)
     return unused_list
 
 
@@ -19,6 +23,7 @@ def get_used_themes(database):
     used_df = df.loc[df['Used'] == True]
     # print(used_df.to_string())
     used_list = used_df['Theme'].tolist()
+    used_list = '\n'.join(used_list)
     # print(used_list)
     return used_list
 
@@ -93,5 +98,42 @@ def get_channel_code(fpath, c):
             return test
         else:
             return day
+
+
+def manual(manpage):
+    man = ''
+    if manpage == '':
+        with open('Manual/manual.txt') as f:
+            lines = f.readlines()
+    else:
+        fpath = f'Manual/{manpage}.txt'
+        with open(fpath) as f:
+            lines = f.readlines()
+
+    man = ''.join(lines)
+
+    return man
+
+
+# returns file path for chart to use in conjunction with delete_image_resource
+def get_weight_loss_chart(name):
+    df = pd.read_csv(f'NoFatNovember/{name}.csv', index_col='Index')
+    dates = df['date']
+    weights = df['weight']
+    with plt.style.context('dark_background'):
+        plt.title('No Fat November Chart')
+        plt.xlabel('Date(mm/dd)')
+        plt.ylabel('Weight(lbs.)')
+        plt.plot(dates, weights, color='blue')
+        plt.show()
+        fpath = f'Resources/{name}-chart.png'
+        plt.savefig(f'Resources/{name}-chart.png')
+        time.sleep(2)
+        delete_image_resource(fpath)
+    return fpath
+
+
+def delete_image_resource(fpath):
+    os.remove(fpath)
 
 

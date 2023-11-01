@@ -9,10 +9,6 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 
-# list of channel id's
-# general:
-
-
 # event listener for starting the bot
 @bot.event
 async def on_ready():
@@ -55,14 +51,14 @@ async def input_theme(ctx, *theme_idea):
 @bot.command(name='print_themes')
 async def print_unused_themes(ctx):
     await ctx.channel.send('Printing all unused themes in list: ')
-    unused_list = get_unused_themes('Themes.csv')
+    unused_list = get_unused_themes('Resources/Themes.csv')
     await ctx.channel.send(unused_list)
 
 
 @bot.command(name='print_used')
 async def print_used_themes(ctx):
     await ctx.channel.send("Printing all of the used themes in list: ")
-    used_list = get_used_themes('Themes.csv')
+    used_list = get_used_themes('Resources/Themes.csv')
     await ctx.channel.send(used_list)
 
 
@@ -75,5 +71,14 @@ async def select_theme_bot(ctx):
 # gets token for the discord server, keep the token in a different file that doesn't get pushed to GitHub for security.
 with open('Resources/token.txt') as f:
     token = f.readline()
+
+
+@bot.command(name='man')
+async def man(ctx, *manpage):
+    if len(manpage) == 0:
+        manpage = ''
+    output = manual(manpage)
+    await ctx.channel.send(output)
+
 
 bot.run(token)
