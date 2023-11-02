@@ -1,6 +1,9 @@
 import re
 import pandas as pd
 import csv
+import matplotlib.pyplot as plt
+import time
+import os
 
 
 # method to print all the themes that have not been used
@@ -94,4 +97,36 @@ def get_channel_code(fpath, c):
         else:
             return day
 
+
+def build_filepath_nov(name):
+    filepath = f'NoFatNovember/{name}.csv'
+    return filepath
+
+
+def write_weight_to_file(fpath, date, weight):
+    df = pd.read_csv(fpath)
+    values = [date, weight]
+    df.loc[len(df)] = values
+    df.to_csv(fpath, index=False)
+
+
+# returns file path for chart to use in conjunction with delete_image_resource
+def get_weight_loss_chart(fpath, name):
+    df = pd.read_csv(fpath)
+    rpath = f'Resources/{name}-chart.png'
+    dates = df['date']
+    weights = df['weight']
+    with plt.style.context('dark_background'):
+        plt.title('No Fat November Chart')
+        plt.xlabel('Date(mm/dd)')
+        plt.ylabel('Weight(lbs.)')
+        plt.plot(dates, weights, color='blue')
+        # plt.show()
+        plt.savefig(rpath)
+        # time.sleep(2)
+    return rpath
+
+
+def delete_image_resource(fpath):
+    os.remove(fpath)
 

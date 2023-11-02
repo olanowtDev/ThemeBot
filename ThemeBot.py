@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import BotFunctions
 from BotFunctions import *
+from datetime import date
 
 
 # instantiate bot object
@@ -70,6 +71,29 @@ async def print_used_themes(ctx):
 async def select_theme_bot(ctx):
     theme = select_theme()
     await ctx.channel.send(f'Your next theme is: {theme}')
+
+
+@bot.command(name='input_weight')
+async def input_weight(ctx, *name_weight):
+    name = name_weight[0]
+    weight = name_weight[1]
+    day = date.today()
+    d = day.strftime("%d/%m")
+    fpath = BotFunctions.build_filepath_nov(name)
+    # print(name, weight, d, fpath)
+    BotFunctions.write_weight_to_file(fpath, d, weight)
+    await ctx.channel.send(f'Weight updated')
+
+
+@bot.command(name='weight_loss')
+async def get_weight_chart(ctx, name):
+    fpath = BotFunctions.build_filepath_nov(name)
+    rpath = BotFunctions.get_weight_loss_chart(fpath, name)
+    try:
+        await ctx.channel.send(file=discord.File(rpath))
+    except FileNotFoundError as e:
+        await ctx.channel.send(f'{rpath} not found')
+    BotFunctions.delete_image_resource(rpath)
 
 
 # gets token for the discord server, keep the token in a different file that doesn't get pushed to GitHub for security.
